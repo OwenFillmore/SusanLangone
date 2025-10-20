@@ -568,10 +568,19 @@
       .frame-img{
         object-fit:cover;
         object-position:center center;
+        position:absolute;
+        height:100vh;
+        height:100dvh;
       }
       
       .oval-window{
         padding:clamp(8px,2vw,16px);
+        position:relative;
+      }
+      
+      body{
+        position:relative;
+        min-height:100vh;
       }
     }
 
