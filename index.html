@@ -256,6 +256,30 @@
       background:rgba(194,74,107,0.08);
     }
 
+    /* Special rainbow styling for Gallery link */
+    nav a[href="#gallery"]{
+      background:linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcf7f, #4ecdc4, #5c7cfa, #a78bfa);
+      background-size:200% 200%;
+      animation:rainbowShift 3s ease infinite;
+      color:white;
+      font-weight:700;
+      box-shadow:0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    nav a[href="#gallery"]:hover{
+      transform:translateY(-2px);
+      box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    nav a[href="#gallery"]::after{
+      display:none;
+    }
+
+    @keyframes rainbowShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
     /* ===== HERO SECTION ===== */
     .hero-section{
       display:grid;
