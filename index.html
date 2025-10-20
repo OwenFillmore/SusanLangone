@@ -564,25 +564,6 @@
       .portrait-main{
         max-width:300px;
       }
-      
-      .frame-img{
-        object-fit:cover;
-        object-position:center center;
-        position:absolute;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        min-height:100%;
-      }
-      
-      .oval-window{
-        padding:clamp(8px,2vw,16px);
-      }
-      
-      body{
-        position:relative;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -799,36 +780,6 @@
 
       // Check for reduced motion preference
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
-      // Get frame element and check if mobile
-      const frame = document.getElementById('floralFrame');
-      const isMobile = window.innerWidth <= 767;
-
-      // ===== FIX MOBILE BORDER =====
-      if(isMobile){
-        // Set border to cover entire page height
-        function setFrameHeight(){
-          const docHeight = Math.max(
-            document.body.scrollHeight,
-            document.body.offsetHeight,
-            document.documentElement.clientHeight,
-            document.documentElement.scrollHeight,
-            document.documentElement.offsetHeight
-          );
-          frame.style.height = docHeight + 'px';
-        }
-        
-        setFrameHeight();
-        
-        // Update on resize/orientation change and after content loads
-        window.addEventListener('resize', setFrameHeight);
-        window.addEventListener('orientationchange', setFrameHeight);
-        window.addEventListener('load', setFrameHeight);
-        
-        // Also update after a short delay to catch dynamic content
-        setTimeout(setFrameHeight, 500);
-        setTimeout(setFrameHeight, 1500);
-      }
 
       // ===== GALLERY LOADING =====
       const galleryData = [
@@ -916,7 +867,9 @@
       }
 
       // ===== PARALLAX SCROLL EFFECT (PRESERVED FROM ORIGINAL) =====
-      if(!reduceMotion && !isMobile){
+      const frame = document.getElementById('floralFrame');
+      
+      if(!reduceMotion){
         frame.style.objectPosition = '50% 0%';
         let rafId = null;
         
@@ -937,9 +890,6 @@
             rafId = null;
           });
         }, {passive: true});
-      } else {
-        // Lock position on mobile
-        frame.style.objectPosition = 'center center';
       }
 
       // ===== BORDER IMAGE ERROR HANDLING (PRESERVED FROM ORIGINAL) =====
