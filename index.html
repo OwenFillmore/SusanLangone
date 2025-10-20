@@ -878,7 +878,10 @@
       // ===== PARALLAX SCROLL EFFECT (PRESERVED FROM ORIGINAL) =====
       const frame = document.getElementById('floralFrame');
       
-      if(!reduceMotion){
+      // Check if device is mobile
+      const isMobile = window.innerWidth <= 767;
+      
+      if(!reduceMotion && !isMobile){
         frame.style.objectPosition = '50% 0%';
         let rafId = null;
         
@@ -899,6 +902,9 @@
             rafId = null;
           });
         }, {passive: true});
+      } else {
+        // Lock position on mobile
+        frame.style.objectPosition = 'center center';
       }
 
       // ===== BORDER IMAGE ERROR HANDLING (PRESERVED FROM ORIGINAL) =====
